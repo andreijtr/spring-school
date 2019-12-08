@@ -1,4 +1,4 @@
-package config;
+package com.sda.spring_school.config;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +12,6 @@ public class HibernateUtil {
 
     private SessionFactory sessionFactory;
     private Session session;
-    private Transaction transaction;
 
     public HibernateUtil () {
         //incarcam confg din hibernate.cfg
@@ -21,9 +20,10 @@ public class HibernateUtil {
         Metadata metadata = sources.getMetadataBuilder().build();
         //bazat pe cfg urile incarcate obtinem un sessionFactory
         sessionFactory = metadata.getSessionFactoryBuilder().build();
+        this.session = sessionFactory.openSession();
     }
 
     public Session getSession() {
-        return sessionFactory.openSession();
+        return this.session;
     }
 }
